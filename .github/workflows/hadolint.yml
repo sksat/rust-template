@@ -11,8 +11,7 @@ jobs:
     name: hadolint
     runs-on: ubuntu-latest
     steps:
-      - name: Check out code
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
       - name: hadolint
         uses: reviewdog/action-hadolint@v1
         with:
