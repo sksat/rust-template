@@ -1,10 +1,13 @@
 name: reviewdog
 
-on: [pull_request]
+on:
+  pull_request:
+    paths:
+      - Dockerfile
 
 jobs:
   hadolint:
-    name: runner / hadolint
+    name: hadolint
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
