@@ -2,6 +2,11 @@ name: Rust
 
 on:
   push:
+    branches:
+      - main
+    tags:
+      - v*
+  pull_request:
     paths:
       - 'src/**'
       - 'Cargo.toml'
