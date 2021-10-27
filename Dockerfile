@@ -2,14 +2,14 @@ FROM gcr.io/distroless/cc
 LABEL maintainer "sksat <sksat@sksat.net>"
 
 # get package name
-FROM rust:1.55.0 as metadata
+FROM rust:1.56.0 as metadata
 WORKDIR metadata
 RUN apt-get update -y && apt-get install -y jq
 ADD . .
 RUN cargo metadata --format-version=1 | jq --raw-output '.packages[0].name' > app_name
 
 # build
-FROM rust:1.55.0 as builder
+FROM rust:1.56.0 as builder
 WORKDIR build
 ADD . .
 RUN cargo build --release
