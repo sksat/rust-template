@@ -3,9 +3,10 @@ name: Build Container Image
 on:
   push:
     branches:
-      - '*'
+      - main
     tags:
       - v*
+  pull_requests:
     paths:
       - 'src/**'
       - 'Cargo.toml'
