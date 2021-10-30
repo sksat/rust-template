@@ -6,7 +6,7 @@ FROM rust:1.56.0 as metadata
 WORKDIR metadata
 RUN apt-get update -y && apt-get install -y jq
 ADD . .
-RUN cargo metadata --format-version=1 | jq --raw-output '.packages[0].name' > app_name
+RUN cargo metadata --format-version=1 | jq --raw-output '.workspace_members[0]' | cut -d' ' -f 1 > app_name
 
 # build
 FROM rust:1.56.0 as builder
