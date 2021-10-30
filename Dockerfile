@@ -3,7 +3,7 @@ LABEL maintainer "sksat <sksat@sksat.net>"
 
 FROM rust:1.56.0 as chef
 RUN cargo install --version 0.1.31 cargo-chef
-WORKDIR build
+WORKDIR /build
 
 # get package name
 FROM chef as metadata
@@ -27,12 +27,12 @@ RUN cargo build --release
 
 # change binary name to /app/bin
 FROM alpine as tmp
-WORKDIR app
+WORKDIR /app
 COPY --from=metadata /build/app_name /tmp
 COPY --from=builder /build/target/release /build
 RUN cp /build/$(cat /tmp/app_name) bin
 
 FROM gcr.io/distroless/cc
-WORKDIR app
+WORKDIR /app
 COPY --from=tmp /app/bin .
 CMD ["/app/bin"]
