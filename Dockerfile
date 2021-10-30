@@ -3,6 +3,7 @@ LABEL maintainer "sksat <sksat@sksat.net>"
 
 # get package name
 FROM rust:1.56.0 as metadata
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 WORKDIR metadata
 RUN apt-get update -y && apt-get install -y jq
 ADD . .
