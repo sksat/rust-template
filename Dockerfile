@@ -1,7 +1,7 @@
 FROM gcr.io/distroless/cc
 LABEL maintainer "sksat <sksat@sksat.net>"
 
-FROM rust:1.56.0 as chef
+FROM rust:1.56.1 as chef
 RUN cargo install --version 0.1.31 cargo-chef
 WORKDIR /build
 
