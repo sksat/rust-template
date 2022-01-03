@@ -4,7 +4,7 @@ LABEL maintainer "sksat <sksat@sksat.net>"
 FROM rust:1.57.0 as chef
 # depName=LukeMathWalker/cargo-chef datasource=github-releases
 ARG CARGO_CHEF_VERSION="v0.1.33"
-RUN cargo install --version "${CARGO_CHEF_VERSION}" cargo-chef
+RUN cargo install --version "${CARGO_CHEF_VERSION#v}" cargo-chef
 WORKDIR /build
 
 # get package name
