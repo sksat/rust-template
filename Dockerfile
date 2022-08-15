@@ -1,11 +1,7 @@
 FROM gcr.io/distroless/cc
 LABEL maintainer "sksat <sksat@sksat.net>"
 
-FROM rust:1.63.0 as chef
-# depName=LukeMathWalker/cargo-chef datasource=github-releases
-ARG CARGO_CHEF_VERSION="v0.1.39"
-RUN cargo install --version "${CARGO_CHEF_VERSION#v}" cargo-chef
-WORKDIR /build
+FROM ghcr.io/sksat/cargo-chef-docker:1.63.0-bullseye as chef
 
 # get package name
 FROM chef as metadata
