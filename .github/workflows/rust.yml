@@ -26,7 +26,7 @@ jobs:
       - uses: dtolnay/rust-toolchain@v1
         with:
           toolchain: ${{ steps.toolchain.outputs.toolchain }}
-          components: clippy
+          components: clippy, rustfmt
 
       - name: cache dependencies
         uses: Swatinem/rust-cache@v2.2.1
