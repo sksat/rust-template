@@ -1,7 +1,7 @@
 FROM gcr.io/distroless/cc
 LABEL maintainer "sksat <sksat@sksat.net>"
 
-FROM ghcr.io/sksat/cargo-chef-docker:1.75.0-bullseye as chef
+FROM ghcr.io/sksat/cargo-chef-docker:1.79.0-bullseye as chef
 WORKDIR /build
 
 # get package name
@@ -9,7 +9,7 @@ FROM chef as metadata
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN apt-get update -y && apt-get install -y jq
 ADD . .
-RUN cargo metadata --format-version=1 | jq --raw-output '.workspace_members[0]' | cut -d' ' -f 1 > app_name
+RUN basename "$(cargo metadata --format-version=1 | jq --raw-output '.workspace_members[0]' | sed 's|.*://||')" | cut -d'@' -f 1 | cut -d'#' -f 2 > app_name
 
 FROM chef as planner
 COPY . .
